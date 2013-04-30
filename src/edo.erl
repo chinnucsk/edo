@@ -5,5 +5,7 @@
 start() -> start([]).
 
 -spec start([string()]) -> ok.
-start(Args) ->
-    io:format("Called with arguments: ~p~n", [Args]).
+start(Args0) ->
+    ArgStr = binary_to_list(base64:decode(list_to_binary(Args0))),
+    Args = string:tokens(ArgStr, " "),
+    io:format("Argument tokens: ~p~n", [Args]).
