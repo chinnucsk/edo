@@ -1,9 +1,11 @@
-.PHONY: clean compile
+.PHONY: clean compile dz
+
+beams = bin/ebin/*.beam
 
 all: compile
 
 clean:
-	-@rm -rf bin/ebin/*.beam
+	-@rm -rf $(beams)
 
 compile:
 	-@erlc -v +debug_info -o bin/ebin -Werror \
@@ -12,3 +14,7 @@ compile:
 		-Wunmatched_returns \
 		-Werror_handling \
 		-Wrace_conditions
+
+dz:
+	-@dialyzer --build_plt $(beams) \
+		--apps erts kernel stdlib
