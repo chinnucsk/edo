@@ -3,8 +3,6 @@ set -e
 
 beam_dir=$(dirname $0)/ebin
 beam_args="+K true +A 16 -stbt spread"
-edo_args=$(echo -n $@ | base64)
 
 erl -connect_all false -noinput -pa $beam_dir $beam_args \
-    -run edo start $edo_args \
-    -s erlang halt
+    -run edo start -extra $@
