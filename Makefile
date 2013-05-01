@@ -1,6 +1,7 @@
-.PHONY: clean compile dz
+.PHONY: clean compile
 
-beams = bin/ebin/*.beam
+beam_dir = bin/ebin
+beams = $(beam_dir)/*.beam
 
 all: compile
 
@@ -8,13 +9,13 @@ clean:
 	-@rm -rf $(beams)
 
 compile:
-	-@erlc -v +debug_info -o bin/ebin -Werror \
+	@erlc -v +debug_info -o $(beam_dir) -Werror \
 		`find src -regex '.*\.\(erl\|hrl\)'` && \
-	dialyzer -q -n bin/ebin \
+	dialyzer --quiet -n bin/ebin \
+		--plts `find build/plts -regex '.*\.plt'`\
 		-Wunmatched_returns \
 		-Werror_handling \
 		-Wrace_conditions
 
-dz:
-	-@dialyzer --build_plt $(beams) \
-		--apps erts kernel stdlib
+plt:
+	-@build/gen_plt
