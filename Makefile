@@ -1,4 +1,4 @@
-.PHONY: clean compile
+.PHONY: clean compile plt
 
 beam_dir = bin/ebin
 beams = $(beam_dir)/*.beam
