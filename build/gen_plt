@@ -1,15 +1,17 @@
 #!/bin/sh
 
 # List of applications to build PLT files for
-apps="kernel stdlib"
+apps="erts kernel stdlib"
+
 # Directory to store PLT files in
-plt_dir=$(dirname $0)/plts
+plt_dir="~/.dialyzer/plts"
+mkdir -p ${plt_dir}
 
 
 cancel_jobs() {
     for pid in $worker_pids; do
         kill $pid 2>/dev/null
-        echo "canceled job $pid"
+        echo "Canceled job $pid"
     done
 }
 trap "echo; cancel_jobs; exit 1" 2
@@ -36,5 +38,5 @@ done
 
 for pid in $worker_pids; do
     wait $pid
-    echo "process $pid finished"
+    echo "Process $pid finished"
 done
