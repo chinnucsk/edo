@@ -4,7 +4,7 @@
 apps="erts kernel stdlib"
 
 # Directory to store PLT files in
-plt_dir="~/.dialyzer/plts"
+plt_dir="${HOME}/.dialyzer/plts"
 mkdir -p ${plt_dir}
 
 
