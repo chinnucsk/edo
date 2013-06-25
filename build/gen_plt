@@ -1,4 +1,6 @@
 #!/bin/sh
+# This file is part of edo:
+# https://github.com/johannesh/edo
 
 # List of applications to build PLT files for
 apps="erts kernel stdlib"
