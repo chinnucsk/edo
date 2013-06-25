@@ -3,7 +3,7 @@
 # https://github.com/johannesh/edo
 
 # List of applications to build PLT files for
-apps="erts kernel stdlib"
+APPS=${APPS:-"erts kernel stdlib"}
 
 # Directory to store PLT files in
 plt_dir="${HOME}/.dialyzer/plts"
@@ -20,7 +20,7 @@ trap "echo; cancel_jobs; exit 1" 2
 
 
 worker_pids=""
-for app in $apps; do
+for app in $APPS; do
     plt_file="${plt_dir}/${app}.plt"
 
     # Build from scratch or verify the app's PLT
